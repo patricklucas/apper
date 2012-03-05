@@ -5,6 +5,8 @@ Apper (name temporary) is a Python WSGI mini-framework designed for quick develo
 
 The primary encapsulation unit is a Python module: Create functions using the provided dectorators in a module, then create an Apper instance, passing it a dictionary of the form `path_prefix -> module`.
 
+Apper's only dependency is [WebOb](http://www.webob.org/), and can be installed with `pip install webob`.
+
 Mini-Framework Mini-Example
 =======
 
