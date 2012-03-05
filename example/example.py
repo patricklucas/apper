@@ -6,8 +6,8 @@ import home
 import hello
 
 app = Apper({
-    '': home,
-    'hello': hello
+    '/': home,
+    '/hello': hello
 })
 
 if __name__ == '__main__':

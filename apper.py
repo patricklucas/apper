@@ -67,11 +67,18 @@ class Apper(object):
         # bar:
         #   GET: [action]
         for name, module in servlets.iteritems():
-            subroutes = self.routes.setdefault(name, {})
+            matches = re.match(r"/?([a-zA-Z0-9_-]*)$", name)
+            if not matches:
+                raise ValueError("Invalid servlet name '%s'" % name)
+            name = matches.group(1) # 'name' without leading /
+
+            if name in self.routes:
+                raise ValueError("Duplicate servlet name '%s'" % name)
+
+            routes = self.routes[name] = {}
             for _, action in inspect.getmembers(module, predicate=isaction):
                 action.servlet = name
-                method_subroutes = subroutes.setdefault(action.method, [])
-                method_subroutes.append((action.route, action.fn))
+                routes.setdefault(action.method, []).append((action.route, action.fn))
 
     def route(self, request):
         servlet_name = request.path_info_pop()
