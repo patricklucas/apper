@@ -12,4 +12,4 @@ def hello_post(req, resp):
         raise webob.exc.HTTPNotFound
     
     name = req.POST['name']
-    raise webob.exc.HTTPSeeOther(location="/hello/%s" % name)
+    raise webob.exc.HTTPSeeOther(location=hello.uri(name=name))

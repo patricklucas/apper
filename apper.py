@@ -10,15 +10,19 @@ class Action(object):
     def __init__(self, method, path, fn):
         super(Action, self).__init__()
         self.method = method
-        self.route = self._compile_path(path)
+        self._compile_path(path)
         self.fn = fn
 
-    @staticmethod
-    def _compile_path(path):
-        s = path.replace('.', '\.')
-        s = re.sub(r"<([a-zA-Z0-9_]+)>", r"(?P<\1>[^./]+)", s)
-        s = '^' + s + '/?$'
-        return re.compile(s)
+    def _compile_path(self, path):
+        self.uri_template = re.sub(r"<([a-zA-Z0-9_]+)>", r"%(\1)s", path)
+
+        route_re = path.replace('.', '\.')
+        route_re = re.sub(r"<([a-zA-Z0-9_]+)>", r"(?P<\1>[^./]+)", route_re)
+        route_re = '^' + route_re + '/?$'
+        self.route = re.compile(route_re)
+
+    def uri(self, **kwargs):
+        return '/' + self.servlet + '/' + self.uri_template % kwargs
 
     def __call__(self, *args, **kwargs):
         return self.fn(*args, **kwargs)
@@ -63,8 +67,9 @@ class Apper(object):
         # bar:
         #   GET: [action]
         for name, module in servlets.iteritems():
+            subroutes = self.routes.setdefault(name, {})
             for _, action in inspect.getmembers(module, predicate=isaction):
-                subroutes = self.routes.setdefault(name, {})
+                action.servlet = name
                 method_subroutes = subroutes.setdefault(action.method, [])
                 method_subroutes.append((action.route, action.fn))
 
