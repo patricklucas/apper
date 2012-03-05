@@ -8,7 +8,7 @@ The primary encapsulation unit is a Python module: Create functions using the pr
 Mini-Framework Mini-Example
 =======
 
-For a slightly (very slightly) more complex example, check out `example/`, or for an insta-demo, run `python -m example.example`.
+For more examples, check out the `examples/` dir, or for an insta-demo, run `python -m examples.sample.main` and go to [http://localhost:8080/](http://localhost:8080/).
 
 hello.py
 --------
