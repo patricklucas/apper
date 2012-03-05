@@ -5,8 +5,10 @@ Apper (name temporary) is a Python WSGI mini-framework designed for quick develo
 
 The primary encapsulation unit is a Python module: Create functions using the provided dectorators in a module, then create an Apper instance, passing it a dictionary of the form `path_prefix -> module`.
 
-Example
+Mini-Framework Mini-Example
 =======
+
+For a slightly (very slightly) more complex example, check out `example/`, or for an insta-demo, run `python -m example.example`.
 
 hello.py
 --------
