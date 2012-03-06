@@ -10,7 +10,7 @@ Apper's only dependency is [WebOb](http://www.webob.org/), and can be installed 
 Mini-Framework Mini-Example
 =======
 
-For more examples, check out the `examples/` dir, or for an insta-demo, run `python -m examples.sample.main` and go to [http://localhost:8080/](http://localhost:8080/).
+For more examples, check out the `examples/` dir, or for an insta-demo, run `python -m examples.simple.main` and go to [http://localhost:8080/](http://localhost:8080/).
 
 hello.py
 --------
